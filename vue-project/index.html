@@ -1,0 +1,60 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8">
+    <link rel="icon" href="/favicon.ico">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Vite App</title>
+    <style>
+      .btn{
+        width: 200px;
+        border-radius:6% ;
+        height: 130px;
+        background-color: antiquewhite;
+        color: aqua;
+        font-size: 60px;
+      }
+      li{
+        list-style-type: none;
+      }
+    </style>
+  </head>
+  <body>
+    <div id="app">????????
+      <button class="btn" @click = 'constructForm' @click = 'changeFlag'>msg</button>
+      <ul ><li>{{userInfo.name}}</li>
+        <li>{{userInfo.age}}</li>
+        <li>{{userInfo.favoriteAnime}}</li></ul>
+    </div>
+    <script src="https://cdn.jsdelivr.net/npm/vue/dist/vue.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js"></script>
+    <script>
+      const vue = new Vue({
+        el:'#app',
+        data:{
+          flag:0,
+          userInfo:{},
+        },
+        methods: {
+          changeFlag(){
+            flag = 1
+          },
+          constructForm(){
+            
+            axios({
+              method:'get',
+              url: 'http://localhost:8000/user',
+              data: {
+              
+              }
+            }).then(res=>{
+              console.log(res);
+              this.userInfo = res.data.userInfo
+              this.accountInfo = res.accountInfo
+            })
+          }
+        },
+      })
+    </script>
+  </body>
+</html>
